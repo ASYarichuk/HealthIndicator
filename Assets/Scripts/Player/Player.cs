@@ -7,30 +7,17 @@ public class Player : Character
 {
     [SerializeField] private int _damage = 2;
 
-    [SerializeField] private Image _healttBar;
-    [SerializeField] private Image _healttBarSmooth;
-
-    [SerializeField] private TMP_Text _healttBarText;
-
     private int _currentHealth = 2;
     private int _maxHealth = 10;
-    private int _timeHealthBarChange = 2;
-
-    private float _currentHealthBar;
 
     private Enemy _enemy;
 
+    public int CurrentHealth => _currentHealth;
+    public int MaxHealth => _maxHealth;
+
     private void Update()
     {
-        _currentHealth = Health;
-        _currentHealthBar = (float)_currentHealth / _maxHealth;
-
-        ShowHealth();
-
-        if (_healttBarSmooth.fillAmount != _currentHealthBar)
-        {
-            _healttBarSmooth.fillAmount = Mathf.Lerp(_healttBarSmooth.fillAmount, _currentHealthBar, _timeHealthBarChange * Time.deltaTime);
-        }
+        _currentHealth = Health; 
     }
 
     private void OnCollisionEnter2D(Collision2D enemy)
@@ -72,11 +59,5 @@ public class Player : Character
         {
             AddHealth(amountHealth);
         }
-    }
-
-    private void ShowHealth()
-    {
-        _healttBarText.text = $"Текущее здоровье: {_currentHealth} / {_maxHealth}";
-        _healttBar.fillAmount = (float)_currentHealthBar;
     }
 }

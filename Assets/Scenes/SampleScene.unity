@@ -6070,6 +6070,7 @@ GameObject:
   - component: {fileID: 1183590154}
   - component: {fileID: 1183590155}
   - component: {fileID: 1183590156}
+  - component: {fileID: 1183590157}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6253,9 +6254,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _damage: 2
-  _healttBar: {fileID: 215426523}
-  _healttBarSmooth: {fileID: 1686027365}
-  _healttBarText: {fileID: 1192919381}
 --- !u!114 &1183590156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6268,6 +6266,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e00f251b5e0cae4bb48c0e05f067567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1183590157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183590144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5183746a162b7bf49b0333bbb23c2b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1183590155}
+  _healttBar: {fileID: 215426523}
+  _healttBarSmooth: {fileID: 1686027365}
+  _healttBarText: {fileID: 1192919381}
 --- !u!1 &1192919379
 GameObject:
   m_ObjectHideFlags: 0
