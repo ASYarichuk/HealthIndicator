@@ -11,30 +11,26 @@ public class HealthBar : MonoBehaviour
 
     [SerializeField] private TMP_Text _healttBarText;
 
-    private float _currentHealthBar;
-
     private float _timeHealthBarChange = 2f;
-    private int _currentHealth;
-    private int _maxHealth;
 
-    private void Update()
+    private void Awake()
     {
-        _currentHealth = _player.CurrentHealth;
-        _maxHealth = _player.MaxHealth;
-
-        _currentHealthBar = (float)_currentHealth / _maxHealth;
-
-        ShowHealth();
-
-        if (_healttBarSmooth.fillAmount != _currentHealthBar)
-        {
-            _healttBarSmooth.fillAmount = Mathf.Lerp(_healttBarSmooth.fillAmount, _currentHealthBar, _timeHealthBarChange * Time.deltaTime);
-        }
+        _player.HealthChanged += ChangeHealth;
     }
 
-    private void ShowHealth()
+    private void OnDestroy()
     {
-        _healttBarText.text = $"Текущее здоровье: {_currentHealth} / {_maxHealth}";
-        _healttBar.fillAmount = (float)_currentHealthBar;
+        _player.HealthChanged -= ChangeHealth;
+    }
+
+    private void ChangeHealth(float percent, int currentHealth, int maxHealth)
+    {
+        _healttBar.fillAmount = percent;
+        _healttBarText.text = $"Текущее здоровье: {currentHealth} / {maxHealth}";
+
+        if (_healttBarSmooth.fillAmount != percent)
+        {
+            _healttBarSmooth.fillAmount = Mathf.Lerp(_healttBarSmooth.fillAmount, percent, _timeHealthBarChange * Time.deltaTime);
+        }
     }
 }

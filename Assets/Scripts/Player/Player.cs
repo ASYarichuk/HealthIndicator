@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System;
 
 public class Player : Character
 {
@@ -12,12 +11,20 @@ public class Player : Character
 
     private Enemy _enemy;
 
-    public int CurrentHealth => _currentHealth;
-    public int MaxHealth => _maxHealth;
+    private float _percent;
+
+    public event Action<float, int, int> HealthChanged;
+
+    private void Awake()
+    {
+        _currentHealth = Health;
+    }
 
     private void Update()
     {
-        _currentHealth = Health; 
+        _currentHealth = Health;
+        _percent = (float)_currentHealth / _maxHealth;
+        HealthChanged?.Invoke(_percent, _currentHealth, _maxHealth);
     }
 
     private void OnCollisionEnter2D(Collision2D enemy)
